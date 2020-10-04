@@ -1,5 +1,5 @@
 # PicIT
-## WebExtension to share / Firefox Addon
+## WebExtension to share
 
 **PicIT** encodes hyperlinks, URL addresses and free / selected text in
 **QRCodes** to share them with a smartphone. With two clicks only, the
