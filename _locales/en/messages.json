@@ -1,0 +1,44 @@
+{
+	"extensionName":{
+		"message":"PicIT",
+		"description":"Name of the extension"
+	},
+	"extensionBrief":{
+	"message":"PicIT encodes hyperlinks, URL addresses and free / selected text in QRCodes to share them with a smartphone. With two clicks, the QRCode is ready. Scan it on your smartphone and you can access a web page, document or image directly.",
+	"description":"Description of the extension"
+	},
+	"extensionInitialUsageWarningTitle":{
+		"message":"Usage Warning",
+		"description":"Headline of initial usage warning, the user has to accept"
+	},
+	"extensionInitialUsageWarning":{
+		"message":"Some URLs and hyperlinks may contain data that can be used to identify you. If you share such sensitive information with others, they may use your identity. Specifically, this could include using your online banking or shopping at the online store under your account. Therefore, use PicIT only if you know what you are doing. PicIT expressly assumes no liability or guarantees safe use.",
+		"description":"Initial usage warning, the user has to accept"
+	},
+	"buttonAccept":{
+		"message":"Accept",
+		"description":"Label of the accept button"
+	},
+	"buttonDeny":{
+		"message":"Decline",
+		"description":"Label of the decline button"
+	},
+	"messageDeny":{
+		"message":"Declined",
+		"description":"Confirmation of the users decline"
+	},
+	"extensionMenuName":{
+		"message":"PicIT",
+		"description":"Menu entry name of the extension"
+	},
+	
+	"textInput":{
+		"message":"Convert...",
+		"description":"Converts the input into QRCode promptly"
+	},
+	
+	"warnToLargeInputText":{
+		"message":"Text is to large",
+		"description":"The input text is to large to be encoded as qrcode"
+	}
+}
