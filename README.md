@@ -1,10 +1,10 @@
 # PicIT
 ## WebExtension to share
 
-**PicIT** encodes hyperlinks, URL addresses and free / selected text in
-**QRCodes** to share them with a smartphone. With two clicks only, the
-**QRCode** is ready. Scan it on your smartphone and you can access a web page,
-document or image directly.
+**PicIT** encodes hyperlinks, URL addresses and free / selected text into
+**QR-Codes** to share them with a smartphone. With two clicks only, the
+**QR-Code** is ready. Scan it on your smartphone and you can access a web page,
+web document or image directly. The Addon saves the **QR-Code** as SVG-Image file.
 
 ## Usage Warning
 Some URLs and hyperlinks may contain data that can be used to identify you.

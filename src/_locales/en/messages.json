@@ -36,7 +36,10 @@
 		"message":"Convert...",
 		"description":"Converts the input into QRCode promptly"
 	},
-	
+	"save":{
+		"message":"Save",
+		"description":"Save QRCode to *.png file"
+	},
 	"warnToLargeInputText":{
 		"message":"Text is to large",
 		"description":"The input text is to large to be encoded as qrcode"

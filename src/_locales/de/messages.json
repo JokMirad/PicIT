@@ -36,7 +36,10 @@
 		"message":"Umwandlen...",
 		"description":"Verwandelt die Eingabe direkt zum QRCode"
 	},
-	
+	"save":{
+		"message":"Speichern",
+		"description":"Speichere den QRCode als *.png Datei"
+	},
 	"warnToLargeInputText":{
 		"message":"Zu langer Text",
 		"description":"Warnung der Eingegebene Text ist zu lang, um als QRCode codiert zu werden"
