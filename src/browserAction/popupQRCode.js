@@ -265,12 +265,10 @@ class QRCodePopup {
 					"): " +
 					JSON.stringify(exception)
 					);
-			// warning noticed: but no dynamic content
+			
 			this._outputMessage.style.display = "block";
-			this._outputMessage.innerHTML =
-					'<p id="warnText">' +
-					browser.i18n.getMessage("warnToLargeInputText") +
-					"</p>";
+			var msg = document.getElementById("warnText");
+			msg. textContent = browser.i18n.getMessage("warnToLargeInputText") ;
 			this._outputQRCode.style.display = "none";
 		}
 	}
