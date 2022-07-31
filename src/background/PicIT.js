@@ -77,9 +77,9 @@ class PicIT {
 
 		return (port) => {
 			if (
-					self._portPopup !== undefined &&
-					self._portPopup.onMessage.hasListener()
-					) {
+				self._portPopup !== undefined &&
+				self._portPopup.onMessage.hasListener()
+			) {
 				self._portPopup.onMessage.removeListener(self.messageHandler());
 			}
 			self._portPopup = port;
@@ -97,31 +97,46 @@ class PicIT {
 		const self = this;
 
 		return (event) => {
-
+			try{
 			if (event.who === "popup" && event.what === "download" && event.body !== undefined) {
 				// save as image
 				// convert svg from event data into memory mapped image file
+				console.log("mime; "+event.mime);
 				var data = new Blob([event.body], {type: event.mime});
 				const url = URL.createObjectURL(data);
-
+				
+				// name of the file
+				var name = "";
+				switch(event.mime){
+					case "image/webp": 
+						name = "QRCode.webp";
+						break;
+					case "image/xml+svg":
+						name = "QRCode.svg";
+						break;					
+					case "image/png":
+					default:
+						name = "QRCode.png";
+						break;
+				}
 				// setup download
-				var downloading = browser.downloads.download(
-						{
-							url: url,
-							filename: "qrcode.svg",
-							saveAs: true,
-							allowHttpErrors: true,
-							conflictAction: "uniquify"
-						});
+				var downloading = browser.downloads.download({
+					url: url,
+					filename: name,
+					saveAs: true,
+					allowHttpErrors: true,
+					conflictAction: "uniquify"
+				});
+						
 				downloading.then((id) => {
 						// register is to cleanup allocated memory on complete
 						self._downloads.push(id);
 					},
 					(error) => {
 						console.error(" download: " + error);
-				}).catch((error) => {
-					console.error(" download catch: " + error);
-				});
+					}).catch((error) => {
+						console.error(" download catch: " + error);
+					});
 			} else {
 
 				// check if we still know _secureText: send text or empty hi
@@ -138,6 +153,10 @@ class PicIT {
 						content: content
 					});
 				}
+			}
+			
+			}catch(exception){
+				console.error("PicIt.background.PicIt.messageHandler: \r\n"+exception+"\r\n"+ JSON.stringify(exception));
 			}
 		};
 	}

@@ -18,5 +18,5 @@ try {
 	browser.runtime.onConnect.addListener(picIT.connected());
 
 } catch (exception) {
-	console.error("PicIT.init: " + JSON.stringify(exception));
+	console.error("PicIT.init: \r\n" + JSON.stringify(exception)+"\r\n"+exception);
 }
