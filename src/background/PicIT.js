@@ -127,7 +127,7 @@ class PicIT {
 					allowHttpErrors: true,
 					conflictAction: "uniquify"
 				});
-						
+
 				downloading.then((id) => {
 						// register is to cleanup allocated memory on complete
 						self._downloads.push(id);
