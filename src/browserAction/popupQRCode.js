@@ -227,7 +227,7 @@ class QRCodePopup {
 			try {
 				if (self._securedText !== null && self._securedText.length > 0) {					
 					console.log("save qrcode as "+mime);
-					
+
 					// QRCode
 					const qrcode = qrcodegen.QrCode.encodeText(self._securedText, qrcodegen.QrCode.Ecc.LOW);
 					
