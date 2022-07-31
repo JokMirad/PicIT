@@ -17,14 +17,12 @@ function init() {
  */
 function handleNoWarning(declined) {
 	try {
-// setup declined popup
+		// setup declined popup
 		const popupWarning = new WarningPopup(init);
 		popupWarning.show(declined);
 
 	} catch (exception) {
-		console.error(
-				"PicIT.browserAction.handleNoWarning: " + JSON.stringify(exception)
-				);
+		console.error("PicIT.browserAction.handleNoWarning: \r\n" + JSON.stringify(exception)+"\r\n"+exception);
 	}
 }
 
@@ -34,12 +32,10 @@ function handleNoWarning(declined) {
  */
 function handleWarning(value) {
 	try {
-		if (
-				value === undefined ||
-				value.warning === undefined ||
-				value.warning.value === undefined
-				) {
-
+		if (	value === undefined ||
+			value.warning === undefined ||
+			value.warning.value === undefined
+		) {
 			// user never read warning
 			handleNoWarning(false);
 		} else if (value.warning.value === "declined") {
@@ -59,8 +55,9 @@ function handleWarning(value) {
 		console.error(
 				"PicIT.browserAction.handleWarning(" +
 				JSON.stringify(value) +
-				"): " +
+				"): \r\n" +
 				JSON.stringify(exception)
+				+"\r\n" + exception
 				);
 	}
 }

@@ -28,10 +28,22 @@ class QRCodePopup {
 		this._outputSVGPath = this._outputQRCode.lastElementChild;
 
 		// Save to file
-		this._btn = document.getElementById("btnSave");
-		this._btn.value = browser.i18n.getMessage("save");
-		this._btn.disabled = true;
-		this._btn.addEventListener("click", this.save());
+		var form = document.getElementById("storeGroup");
+		form.innerText = browser.i18n.getMessage("save");
+		
+		this._btns = new Array();
+		this._btns.push(document.getElementById("btnSaveSVG"));
+		this._btns[0].disabled = true;
+		this._btns[0].addEventListener("click", this.saveSVG());
+		
+		this._btns.push(document.getElementById("btnSaveWebP"));
+		this._btns[1].disabled = true;
+		this._btns[1].setAttribute("style","display: none");
+		this._btns[1].addEventListener("click", this.save("image/webp"));
+		
+		this._btns.push(document.getElementById("btnSavePNG"));
+		this._btns[2].disabled = true;
+		this._btns[2].addEventListener("click", this.save("image/png"));
 	}
 
 	show() {
@@ -99,10 +111,10 @@ class QRCodePopup {
 							}
 						}
 					},
-							(event) => {
+					(event) => {
 						console.error(
-								"PicIT.Popup.handleResponse: get query: " +
-								JSON.stringify(event)
+								"PicIT.Popup.handleResponse: get query: \r\n" +
+								JSON.stringify(event) +"\r\n" + event
 								);
 					}
 					);
@@ -115,8 +127,8 @@ class QRCodePopup {
 				console.error(
 						"PicIT.Popup.handleResponse(" +
 						JSON.stringify(message) +
-						"): " +
-						JSON.stringify(exception)
+						"):\r\n " +
+						JSON.stringify(exception)+ "\r\n"+exception
 						);
 			}
 		};
@@ -137,22 +149,20 @@ class QRCodePopup {
 					self.clear();
 				}
 			} catch (exception) {
-				console.error("PicIT.Popup.updateValue: " + exception);
+				console.error("PicIT.Popup.updateValue: \r\n" + exception);
 			}
 		};
 	}
 
-	/**
-	 * Save the qcode to file without Download api
+		/**
+	 * Save the qrcode as SVG to file by Download api
 	 * @return { function(event) }
 	 */
-	save() {
+	saveSVG() {
 		const self = this;
 
 		return (event) => {
 			try {
-				console.log("save was called for: " + JSON.stringify(self._securedText));
-
 				if (self._securedText !== null && self._securedText.length > 0) {
 					// QRCode
 					const qrcode = qrcodegen.QrCode.encodeText(self._securedText, qrcodegen.QrCode.Ecc.LOW);
@@ -187,8 +197,8 @@ class QRCodePopup {
 							+	`scale(${factor},${factor})"`
 							+	`\r\n			d=\"${path}\"/>"`
 							+	`\r\n</svg>`;
-
-					// send job to background script
+							
+					// send job to background script					
 					this._portBackground.postMessage({
 						who: "popup",
 						what: "download",
@@ -198,9 +208,47 @@ class QRCodePopup {
 				} else {
 					console.error("PicIT.popupQRCode.save: empty message");
 				}
-			} catch (exception) {
-				console.log(exception);
-				console.error("PicIT.popupQRCode.save: " + JSON.stringify(exception));
+			} catch (exception) {				
+				console.error("PicIT.popupQRCode.save: \r\n" + JSON.stringify(exception)+"\r\n"+exception);
+			}
+		};
+	}
+	
+	/**
+	 * Save the qrcode as mime file without Download api
+	 * @param mime ["image/png","image/webp"]
+	 * @return { function(event) }
+	 */
+	save(mime) {
+		const self = this;
+		const MIME = mime;
+		
+		return (event) => {
+			try {
+				if (self._securedText !== null && self._securedText.length > 0) {
+					
+					// QRCode
+					const qrcode = qrcodegen.QrCode.encodeText(self._securedText, qrcodegen.QrCode.Ecc.LOW);
+					
+					// draw
+					var canvas = document.getElementById("outputCanvas");
+					qrcode.drawCanvas(8,1,canvas);
+					canvas.toBlob( (blob) => {
+							// store
+							this._portBackground.postMessage({
+								who: "popup",
+								what: "download",
+								mime: MIME,
+								body: blob
+							});									
+						},
+						{type: mime}
+					);
+				} else {
+					console.error("PicIT.popupQRCode.save: empty message");
+				}
+			} catch (exception) {				
+				console.error("PicIT.popupQRCode.save: \r\n" + JSON.stringify(exception)+"\r\n"+exception);
 			}
 		};
 	}
@@ -224,11 +272,13 @@ class QRCodePopup {
 
 			if (secureText.length > 0) {
 				this._securedText = secureText;
+
 				// get QR-Code
 				const qrcode = qrcodegen.QrCode.encodeText(this._securedText, qrcodegen.QrCode.Ecc.LOW);
 
 				// as SVG image
 				const svg = qrcode.toSvgString(0);
+
 				const path = svg.substring(svg.indexOf("<path d=\"") + "<path d=\"".length, svg.indexOf("\" fill=\"#000000\""));
 
 				// calculate scale and translation
@@ -249,12 +299,18 @@ class QRCodePopup {
 				this._outputSVGPath.setAttribute('transform', scale);
 
 				this._outputQRCode.alt = this._securedText;
-				this._btn.disabled = false;
+				console.log("created");
+				for( let i=0; i<this._btns.length; i++){
+					console.log("set: "+i);
+					this._btns[i].disabled = false;
+				};
 			} else {
 				this._outputSVGPath.setAttribute('d', "");
 				this._outputSVGPath.setAttribute('transform', "");
 				this.clear();
-				this._btn.disabled = true;
+				for( let i=0; i<this._btns.length; i++){
+					this._btns[i].disabled = true;
+				};
 			}
 		} catch (exception) {
 			console.error(
@@ -262,8 +318,8 @@ class QRCodePopup {
 					JSON.stringify(message) +
 					" => " +
 					JSON.stringify(secureText) +
-					"): " +
-					JSON.stringify(exception)
+					"): \r\n" +
+					JSON.stringify(exception)+ "\r\n" + exception
 					);
 			
 			this._outputMessage.style.display = "block";
@@ -281,6 +337,8 @@ class QRCodePopup {
 		this._outputMessage.style.display = "none";
 		this._outputQRCode.alt = "";
 		this._inTxt.value = "";
-		this._btn.disabled = true;
+		for( let i=0; i<this._btns.length; i++){
+			this._btns[i].disabled = true;
+		};
 	}
 }

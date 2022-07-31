@@ -21,15 +21,13 @@ class WarningPopup {
 			document.getElementById("body").style.width = "400px";
 			document.getElementById("warningBlock").style.display = "block";
 
-			document.getElementById(
-					"warningTitle"
-					).textContent = browser.i18n.getMessage(
-					"extensionInitialUsageWarningTitle"
-					);
+			document.getElementById("warningTitle")
+					.textContent = browser.i18n.getMessage(
+					"extensionInitialUsageWarningTitle");
 
-			document.getElementById(
-					"warningMessage"
-					).textContent = browser.i18n.getMessage("extensionInitialUsageWarning");
+			document.getElementById("warningMessage"
+					).textContent = browser.i18n.getMessage(
+					"extensionInitialUsageWarning");
 
 			this._btnAccept.textContent = browser.i18n.getMessage("buttonAccept");
 			this._btnAccept.addEventListener("click", this.onAccept());
@@ -44,8 +42,8 @@ class WarningPopup {
 				this._msgDecline.style.display = "none";
 			}
 		} catch (exception) {
-			console.error("PicIT.WarningPopup.show: " + JSON.stringify(exception));
-	}
+			console.error("PicIT.WarningPopup.show: \r\n" + JSON.stringify(exception)+"\r\n"+exception);
+		}
 	}
 
 	onAccept(event) {
@@ -77,7 +75,7 @@ class WarningPopup {
 	}
 	onError() {
 		return (error) => {
-			console.error("PicIT.popupWarning.onError: " + JSON.stringify(error));
+			console.error("PicIT.popupWarning.onError: \r\n" + JSON.stringify(error)+"\r\n"+error);
 		};
 	}
 }

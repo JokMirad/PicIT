@@ -38,6 +38,9 @@
 			min-width: 100%;
 			min-height: 180px;
 		}
+		#outputCanvas {
+			display: none;
+		}
 		#outputQRCode{
 			margin: 6px auto;
 			padding: 0;
@@ -113,6 +116,18 @@
 			font-weight: bold;
 			color: darkred;
 		}
+		fieldset{
+			display: flex;
+			flex-direction: row;
+			width; 100%;
+			column-gap: 0.2em;
+			
+			flex-align: stretch;
+			align-content: space-around;
+		}
+		fieldset input {
+			flex: 2 2 100%;
+		}
 		</style>
 	</head>
 
@@ -122,16 +137,28 @@
 			<!-- text input and text output -->
 			<input id="inputText" type="text" />
 
-			<!-- qrcode output -->
+			<!-- qrcode output visial -->
 			<svg id="outputQRCode" class="centering">
 					<path id="data_path" fill="#000000" d="M 125,5 A 100 100 0 0 0 125,195"/> 
 			</svg>
 			
+			<!-- store image encoded as png or wepb -->
+			<canvas id="outputCanvas">
+			</canvas>
+			
 			<div id="outputMessage" class="centering">
 				<p id="warnText"></p>
 			</div>
+			
 			<!-- save as image -->
-			<input id="btnSave" type="button" value="save" />
+			<form id="store" >
+			<fieldset>
+				<legend id="storeGroup">SAVE</legend>
+				<input id="btnSavePNG" type="button" value="PNG" />
+				<input id="btnSaveSVG" type="button" value="SVG" />
+				<input id="btnSaveWebP" type="button" value="WebP" />
+			</fieldset>
+			</form>
 		</div>
 
 		<!-- this block show the warning message -->
