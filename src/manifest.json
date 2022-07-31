@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "PicIT",
 	"description": "Context menu extension, convert links and selected text into QRCode popup",
-	"version": "1.3",
+	"version": "1.5",
 	"homepage_url": "https://github.com/JokMirad/PicIT",
 	"default_locale": "de",
 	"author": "PicIT.JokMirad@gmail.com",
@@ -10,7 +10,7 @@
 	"browser_specific_settings": {
 		"gecko": {
 			"id": "PicIT.JokMirad@gmail.com",
-			"strict_min_version": "64.0"
+			"strict_min_version": "79.0"
 		}
 	},
 
