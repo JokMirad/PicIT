@@ -10,7 +10,7 @@
 	"browser_specific_settings": {
 		"gecko": {
 			"id": "PicIT.JokMirad@gmail.com",
-			"strict_min_version": "109"
+			"strict_min_version": "109.0"
 		}
 	},
 
