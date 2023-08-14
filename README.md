@@ -1,4 +1,4 @@
-# PicIT
+# PicIT - QR-Code
 ## WebExtension to share
 
 **PicIT** encodes hyperlinks, URL addresses and free / selected text into

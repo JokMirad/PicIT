@@ -10,27 +10,54 @@
 		<style>
 		body{
 			margin: 0;
-			padding: 0;
+			padding: 6px;
 
 			display: flex;
 			justify-content: center;
 			align-items: center;
-		}
-		#inputText{
-			margin: 0 auto;
+			
+			width: max-content;
+		}	
+		#acceptedBlock{
+			display: none;
+
+			margin: 0;
 			padding: 0;
 
+			width: 100%;
+			height: 100%;
+
+			overflow: hidden;
+		}
+		#warningBlock{
+			display: none;
+
+			margin: 20px;
+			padding: 10px;
+
+			width: 100%;
+			height: 100%;
+
+			overflow: visible;
+		}
+		
+		#inputText{
+			margin: 0 auto;
+			margin-bottom: 1em;
+			padding: 1px;
+						
 			text-overflow: ellipsis;
 			white-space: nowrap;
 			overflow: hidden;
 
 			display: block;
-
-			width: 100%;
-			min-height: 24px;
+			
+			min-width: 10em;
+			width: 94%;
+			min-height: 1.2em;
 		}
 		#outputMessage{
-			margin: 6px;
+			margin: 0;
 			padding: 0;
 
 			display: none;
@@ -68,28 +95,6 @@
 			font-size: 15pt;
 			font-weight: bold;
 		}
-		#acceptedBlock{
-			display: none;
-
-			margin: 0;
-			padding: 0;
-
-			width: 100%;
-			height: 100%;
-
-			overflow: hidden;
-		}
-		#warningBlock{
-			display: none;
-
-			margin: 20px;
-			padding: 10px;
-
-			width: 100%;
-			height: 100%;
-
-			overflow: visible;
-		}
 		#warningBlock > h1 {
 			margin: 0 auto;
 			padding: 0;
@@ -116,17 +121,25 @@
 			font-weight: bold;
 			color: darkred;
 		}
+		#store{
+			margin: 0 auto;
+			padding: 0;
+			width: 98%;
+		}
 		fieldset{
 			display: flex;
 			flex-direction: row;
-			width; 100%;
-			column-gap: 0.2em;
-			
-			flex-align: stretch;
+			margin: 0;
+			padding: 0.6em;
+			column-gap: 0.6em;
 			align-content: space-around;
 		}
 		fieldset input {
-			flex: 2 2 100%;
+			flex: 2 2 98%;
+		}
+		fieldset > button {			
+			width: min-content;
+			cursor: pointer;
 		}
 		</style>
 	</head>
@@ -173,10 +186,10 @@
 			</div>
 		</div>
 
-		<script type="text/javascript" src="../lib/nayuki/qrcodegen.js"></script>
-		<script type="text/javascript" src="../lib/purify/purify.min.js"></script>
-		<script type="text/javascript" src="../browserAction/popupQRCode.js"></script>
-		<script type="text/javascript" src="../browserAction/popupWarning.js"></script>
-		<script type="text/javascript" src="../browserAction/browserAction.js"></script>
+		<script src="../lib/nayuki/qrcodegen.js"></script>
+		<script src="../lib/purify/purify.min.js"></script>
+		<script src="../browserAction/popupQRCode.js"></script>
+		<script src="../browserAction/popupWarning.js"></script>
+		<script src="../browserAction/browserAction.js"></script>
 	</body>
 </html>
