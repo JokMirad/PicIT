@@ -63,7 +63,7 @@ class PicIT {
 
 				self._secureText = DOMPurify.sanitize(text);
 
-				browser.browserAction.openPopup();
+				browser.action.openPopup();
 			}
 		};
 	}
