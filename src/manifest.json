@@ -2,7 +2,7 @@
 	"manifest_version": 3,
 	"name": "PicIT - QR-Code",
 	"description": "Context menu extension, convert links, selected text , clipboard into QR-Code",
-	"version": "1.6",
+	"version": "1.7",
 	"homepage_url": "https://github.com/JokMirad/PicIT",
 	"default_locale": "de",
 	"author": "PicIT.JokMirad@gmail.com",
